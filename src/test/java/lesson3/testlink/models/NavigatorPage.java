@@ -1,11 +1,13 @@
 package lesson3.testlink.models;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import lesson3.testlink.locators.Locators;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -30,14 +32,12 @@ public class NavigatorPage extends BasePage {
         return new TestSuitePage(wd);
     }
 
-
-    public TestCasePage selectTestCase(String testSuiteName, String testCaseName) throws InterruptedException {
-        log.info("selectTestCase");
-        switchToParentFrame();
-        WebDriverWait wait = new WebDriverWait(wd,15);
+    public String selectTestCase(String testSuiteName, String testCaseName) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(wd, 15);
         sleep(3000);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
         List<WebElement> testSuites = wd.findElements(By.cssSelector("ul[class=x-tree-node-ct] li"));
+        String backgroundColor = "";
         for (WebElement testSuite : testSuites) {
             if (testSuite.getText().contains(testSuiteName + " (")) {
                 List<WebElement> arrow = testSuite.findElements(By.cssSelector("img[class*=\"-plus\"]"));
@@ -49,6 +49,7 @@ public class NavigatorPage extends BasePage {
                 for (WebElement testCase : testCases) {
                     if (testCase.getText().contains(testCaseName)) {
                         testCase.click();
+                        backgroundColor = testCase.getCssValue("background-color");
                     }
                 }
 
@@ -57,8 +58,28 @@ public class NavigatorPage extends BasePage {
 
 
         switchToParentFrame();
+        return backgroundColor;
+    }
+
+
+    public TestCasePage selectTestCaseForEdit(String testSuiteName, String testCaseName) throws InterruptedException {
+        log.info("selectTestCaseForEdit");
+        switchToParentFrame();
+        selectTestCase(testSuiteName, testCaseName);
         return new TestCasePage(wd);
     }
+
+    public TestExecutePage selectTestCaseForExecute(String testSuiteName, String testCaseName) throws InterruptedException, IOException {
+        log.info("selectTestCaseForExecute");
+        String backgroundColor = selectTestCase(testSuiteName, testCaseName);
+        System.out.println(backgroundColor);
+        //assert backgroundColor.equals(Locators.colorNotRunRegExp);
+
+        File srcFile = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(srcFile, new File("screenshot.png"));
+        return new TestExecutePage(wd);
+    }
+
 
 }
 

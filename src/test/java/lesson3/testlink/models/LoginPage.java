@@ -29,11 +29,11 @@ public class LoginPage extends BasePage {
 
     }
 
-    public MainPage login(String userName, String password){
+    public DashboardPage login(String userName, String password){
         setUserName(userName);
         setPassword(password);
         pressLoginButton();
-        return new MainPage(wd);
+        return new DashboardPage(wd);
     }
 
 }

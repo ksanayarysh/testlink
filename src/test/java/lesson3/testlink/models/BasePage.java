@@ -1,9 +1,13 @@
 package lesson3.testlink.models;
 
+import lesson3.testlink.Colors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class BasePage {
@@ -11,9 +15,8 @@ public class BasePage {
     protected WebDriver wd;
 
     protected Logger log = LogManager.getLogger(BasePage.class);
-
     public BasePage(WebDriver wd) {
-
+        new Colors();
         this.wd = wd;
 
     }
@@ -38,5 +41,11 @@ public class BasePage {
 
     protected void switchToParentFrame(){
         wd.switchTo().parentFrame();
+    }
+
+    protected boolean checkColor(String actualColor, String patternColor) {
+        Pattern pattern = Pattern.compile(patternColor);
+        Matcher match = pattern.matcher(actualColor);
+        return match.find();
     }
 }
