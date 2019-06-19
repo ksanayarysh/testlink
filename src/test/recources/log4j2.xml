@@ -8,12 +8,17 @@
                 <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
             </PatternLayout>
         </File>
+        <Console name="con">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
+            </PatternLayout>
+        </Console>
     </Appenders>
     <!-- Секция логгеров -->
     <Loggers>
         <!-- Корневой логгер -->
         <Root level="trace">
-            <AppenderRef ref="file" level="DEBUG"/>
+            <AppenderRef ref="con" level="DEBUG"/>
         </Root>
     </Loggers>
 </Configuration>

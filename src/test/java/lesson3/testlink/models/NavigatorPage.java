@@ -1,5 +1,6 @@
 package lesson3.testlink.models;
 
+import lesson3.testlink.enums.TestStatus;
 import lesson3.testlink.locators.Locators;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -34,7 +35,7 @@ public class NavigatorPage extends BasePage {
 
     public String selectTestCase(String testSuiteName, String testCaseName) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(wd, 15);
-        sleep(3000);
+        sleep(1000);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
         List<WebElement> testSuites = wd.findElements(By.cssSelector("ul[class=x-tree-node-ct] li"));
         String backgroundColor = "";
@@ -69,14 +70,23 @@ public class NavigatorPage extends BasePage {
         return new TestCasePage(wd);
     }
 
-    public TestExecutePage selectTestCaseForExecute(String testSuiteName, String testCaseName) throws InterruptedException, IOException {
+    public TestExecutePage selectTestCaseForExecute(String testSuiteName, String testCaseName, String testStatus) throws InterruptedException, IOException {
         log.info("selectTestCaseForExecute");
         String backgroundColor = selectTestCase(testSuiteName, testCaseName);
         System.out.println(backgroundColor);
-        //assert backgroundColor.equals(Locators.colorNotRunRegExp);
+
+        if (!(testStatus.equals(""))) {
+            log.info(backgroundColor);
+            log.info(TestStatus.getTestTreeColorByStatus(testStatus));
+            assert checkColor(backgroundColor, TestStatus.getTestTreeColorByStatus(testStatus));
+        }
 
         File srcFile = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(srcFile, new File("screenshot.png"));
+
+        wd.switchTo().defaultContent();
+        switchToFrame(1);
+
         return new TestExecutePage(wd);
     }
 

@@ -12,11 +12,21 @@ public class TestCaseObject {
     private List<String> steps;
     private int stepCount = 0;
 
+    public TestCaseObject() {
+        this.name = "Проверка входа с правильными creds";
+        this.summary = "Преверяем возможность логина с верными логином и паролем";
+        this.preconditions = "Установлен тест-линк, существует пользователь с логин test пароль test";
+        steps = new ArrayList<String>();
+        this.addStep("Зайти по адресу localhost/testlink");
+        this.addStep("Ввести логин test");
+        this.addStep("Ввести пароль test");
+        this.addStep("Нажать кнопку войти");
+    }
+
     public TestCaseObject(String name, String summary, String preconditions) {
         this.name = name;
         this.summary = summary;
         this.preconditions = preconditions;
-        steps = new ArrayList<String>();
     }
 
     public String getName() {
@@ -43,15 +53,6 @@ public class TestCaseObject {
     public int getStepCount() {
         return stepCount;
     }
-
-    //    public List<String> setSteps(){
-//        List<String> steps = new ArrayList<String>();
-//        steps.add("Зайти по адресу localhost/testlink");
-//        steps.add("Ввести логин test");
-//        steps.add("Ввести пароль test");
-//        steps.add("Нажать кнопку войти");
-//        return steps;
-//    }
 
 
 }

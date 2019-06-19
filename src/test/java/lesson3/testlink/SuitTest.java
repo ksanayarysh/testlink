@@ -31,10 +31,7 @@ public class SuitTest extends BaseTest {
 
     @Test
     void test() throws InterruptedException {
-        testCase1.addStep("Зайти по адресу localhost/testlink");
-        testCase1.addStep("Ввести логин test");
-        testCase1.addStep("Ввести пароль test");
-        testCase1.addStep("Нажать кнопку войти");
+
 
 
         new LoginPage(wd).init(baseURI)

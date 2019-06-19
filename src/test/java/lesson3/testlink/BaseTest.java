@@ -15,9 +15,7 @@ public class BaseTest {
 
     protected final String baseURI = "http://localhost:12325/testlink/";
     protected final String testSuiteName = "TestSuite2";
-    protected TestCaseObject testCase1 = new TestCaseObject("Проверка входа с правильными creds",
-            "Преверяем возможность логина с верными логином и паролем",
-            "Установлен тест-линк, существует пользователь с логин test пароль test");
+    protected TestCaseObject testCase1 = new TestCaseObject();
 
     @BeforeAll
     public static void setUp() {

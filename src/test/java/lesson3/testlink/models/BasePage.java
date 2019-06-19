@@ -1,6 +1,5 @@
 package lesson3.testlink.models;
 
-import lesson3.testlink.Colors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -16,7 +15,6 @@ public class BasePage {
 
     protected Logger log = LogManager.getLogger(BasePage.class);
     public BasePage(WebDriver wd) {
-        new Colors();
         this.wd = wd;
 
     }

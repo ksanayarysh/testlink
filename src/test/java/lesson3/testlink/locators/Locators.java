@@ -2,10 +2,6 @@ package lesson3.testlink.locators;
 
 import org.openqa.selenium.By;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 public class Locators {
     public static By loginField = By.cssSelector("#tl_login");
