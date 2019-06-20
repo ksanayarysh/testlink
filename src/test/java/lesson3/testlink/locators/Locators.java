@@ -40,4 +40,9 @@ public class Locators {
 
     public static By executeHistoryLastResult = By.cssSelector("#execution_history tr td[class][title]");
 
+
+    public static By testTreeNode = By.cssSelector("ul[class=x-tree-node-ct] li");
+    public static By testTreeNodeTestcase = By.cssSelector("ul li");
+    public static By testTreeArrow = By.cssSelector("img[class*=\"-plus\"]");
+
 }

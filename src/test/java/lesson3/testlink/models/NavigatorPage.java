@@ -20,8 +20,8 @@ public class NavigatorPage extends BasePage {
 
 
     public TestSuitePage selectTestSuit(String testSuiteName) throws InterruptedException {
-        switchToParentFrame();
-        sleep(3000);
+        wd.switchTo().defaultContent();
+        sleep(1000);
         switchToFrame(0);
         List<WebElement> testSuites = wd.findElements(By.cssSelector("ul[class=x-tree-node-ct] li"));
         for (WebElement testSuite : testSuites) {
@@ -37,16 +37,17 @@ public class NavigatorPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(wd, 15);
         sleep(1000);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
-        List<WebElement> testSuites = wd.findElements(By.cssSelector("ul[class=x-tree-node-ct] li"));
+        List<WebElement> testSuites = wd.findElements(Locators.testTreeNode);
+
         String backgroundColor = "";
         for (WebElement testSuite : testSuites) {
             if (testSuite.getText().contains(testSuiteName + " (")) {
-                List<WebElement> arrow = testSuite.findElements(By.cssSelector("img[class*=\"-plus\"]"));
+                List<WebElement> arrow = testSuite.findElements(Locators.testTreeArrow);
                 if (arrow.size() > 0) {
                     arrow.get(0).click();
                 }
 
-                List<WebElement> testCases = testSuite.findElements(By.cssSelector("ul li a span"));
+                List<WebElement> testCases = testSuite.findElements(Locators.testTreeNodeTestcase);
                 for (WebElement testCase : testCases) {
                     if (testCase.getText().contains(testCaseName)) {
                         testCase.click();
@@ -73,11 +74,8 @@ public class NavigatorPage extends BasePage {
     public TestExecutePage selectTestCaseForExecute(String testSuiteName, String testCaseName, String testStatus) throws InterruptedException, IOException {
         log.info("selectTestCaseForExecute");
         String backgroundColor = selectTestCase(testSuiteName, testCaseName);
-        System.out.println(backgroundColor);
 
         if (!(testStatus.equals(""))) {
-            log.info(backgroundColor);
-            log.info(TestStatus.getTestTreeColorByStatus(testStatus));
             assert checkColor(backgroundColor, TestStatus.getTestTreeColorByStatus(testStatus));
         }
 

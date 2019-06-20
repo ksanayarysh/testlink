@@ -1,7 +1,6 @@
 package lesson3.testlink;
 
 import lesson3.testlink.enums.TestStatus;
-import lesson3.testlink.locators.Locators;
 import lesson3.testlink.models.LoginPage;
 import lesson3.testlink.objects.Creds;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ public class TestTestCase extends BaseTest {
 
 
     @Test
-    public void test() throws InterruptedException, IOException {
+    public void testMarkingTests() throws InterruptedException, IOException {
         new LoginPage(wd).init(baseURI)
                 .login(Creds.login, Creds.password)
                 .pressTestExecute()
@@ -20,30 +19,19 @@ public class TestTestCase extends BaseTest {
                         testSuiteName,
                         testCase1.getName(),
                         "")
-                .checkStatusByColor()
+                .checkStatusByColor(TestStatus.NOT_RUN)
                 .setTestStatusPassed()
                 .selectTestCaseForExecute(
                         testSuiteName,
                         testCase1.getName(),
                         TestStatus.PASSED.getColorMaskInTree())
-                .checkStatusByColor()
+                .checkStatusByColor(TestStatus.PASSED)
                 .setTestStatusFailed()
                 .selectTestCaseForExecute(
                         testSuiteName,
                         testCase1.getName(),
-                        TestStatus.FAILED.getColorMaskInTree());
+                        TestStatus.FAILED.getColorMaskInTree())
+                .checkStatusByColor(TestStatus.FAILED);
     }
 
-
-    @Test
-    public void color() {
-        for (TestStatus ts : TestStatus.values())
-            System.out.println(ts + "   " + ts.getShortName());
-    }
-
-
-    @Test
-    public void ets() {
-        System.out.println(Creds.login);
-    }
 }

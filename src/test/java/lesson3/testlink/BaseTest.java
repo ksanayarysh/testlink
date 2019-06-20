@@ -14,8 +14,12 @@ public class BaseTest {
     public static WebDriver wd;
 
     protected final String baseURI = "http://localhost:12325/testlink/";
-    protected final String testSuiteName = "TestSuite2";
+    protected final String testSuiteName = "TestSuite3";
     protected TestCaseObject testCase1 = new TestCaseObject();
+
+    protected TestCaseObject testCase2 = new TestCaseObject("Test Case 2",
+            "Summary 2", "Preconditions 2");
+
 
     @BeforeAll
     public static void setUp() {

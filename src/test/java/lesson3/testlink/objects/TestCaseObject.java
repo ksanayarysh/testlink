@@ -1,7 +1,5 @@
 package lesson3.testlink.objects;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -33,18 +33,22 @@ public class TestExecutePage extends BasePage {
     }
 
 
-    public TestExecutePage checkStatusByColor() throws InterruptedException {
+    public TestExecutePage checkStatusByColor(TestStatus testStatus) throws InterruptedException {
         sleep(1000);
         switchToFrame(1);
-        String backgroundColor = wd.findElements(Locators.executeHistoryLastResult).get(0)
-                .getCssValue("background-color");
-        List<WebElement> element = wd.findElements(Locators.executeHistoryLastResult);
-        assert checkColor(backgroundColor, TestStatus.getTestColorByStatus(element.get(0).getText()));
+        WebElement testElement;
+
+        if (testStatus.equals(TestStatus.NOT_RUN)) {
+            testElement = wd.findElements(Locators.executeHistoryNotRun).get(0);
+        } else {
+            testElement = wd.findElements(Locators.executeHistoryLastResult).get(0);
+        }
+        String backgroundColor = testElement.getCssValue("background-color");
+        assert checkColor(backgroundColor, TestStatus.getTestColorByStatus(testElement.getText()));
         return this;
     }
 
     public NavigatorPage setTestStatusPassed() {
-        System.out.println(TestStatus.PASSED.getShortName());
         setTestStepResult(TestStatus.PASSED.getShortName());
         setTestResult(Locators.testPassed);
         switchToParentFrame();
