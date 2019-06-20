@@ -1,5 +1,6 @@
 package lesson3.testlink.models;
 
+import lesson3.testlink.objects.TestPlan;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -12,6 +13,9 @@ import java.util.regex.Pattern;
 public class BasePage {
 
     protected WebDriver wd;
+
+    protected TestPlan testPlan = new TestPlan();
+
 
     protected Logger log = LogManager.getLogger(BasePage.class);
     public BasePage(WebDriver wd) {

@@ -19,4 +19,10 @@ public class DashboardPage extends BasePage {
         clickElement(Locators.testExecLink);
         return new NavigatorPage(wd);
     }
+
+    public PlanManagementPage pressPlanManagement(){
+        switchToFrame(1);
+        clickElement(Locators.testTestManagementLink);
+        return new PlanManagementPage(wd);
+    }
 }

@@ -11,6 +11,7 @@ public class Locators {
 
     public static By testSpecLink = By.partialLinkText("Test Specification");
     public static By testExecLink = By.partialLinkText("Execute Tests");
+    public static By testTestManagementLink = By.partialLinkText("Test Plan Management");
 
     public static By settingsLink = By.cssSelector("div.workBack [title=Actions]");
 
@@ -44,5 +45,10 @@ public class Locators {
     public static By testTreeNode = By.cssSelector("ul[class=x-tree-node-ct] li");
     public static By testTreeNodeTestcase = By.cssSelector("ul li");
     public static By testTreeArrow = By.cssSelector("img[class*=\"-plus\"]");
+
+    public static By createTestPlanButton = By.name("create_testplan");
+    public static By testPlanName = By.name("testplan_name");
+    public static By isPublic = By.name("is_public");
+    public static By saveTestPlan = By.name("do_create");
 
 }

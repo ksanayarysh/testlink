@@ -1,4 +1,4 @@
-package lesson3.testlink;
+package lesson3.testlink.tests;
 
 import lesson3.testlink.enums.TestStatus;
 import lesson3.testlink.models.LoginPage;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class TestTestCase extends BaseTest {
+public class TestCaseTest extends BaseTest {
 
 
     @Test
